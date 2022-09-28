@@ -10,7 +10,16 @@ Desde <https://coinmarketcap.com/es/> seleccionaremos las 10 criptomonedas con m
 
 ### Lista de mercados
 
-['BTC/USD','ETH/USD','USDT/USD','BNB/USD','XRP/USD','SOL/USD','DOGE/USD','DOT/USD','DAI/USD','SHIB/USD']
+BTC/USD
+ETH/USD
+USDT/USD
+BNB/USD
+XRP/USD
+SOL/USD
+DOGE/USD
+DOT/USD
+DAI/USD
+SHIB/USD
 
 ## ETL
 
