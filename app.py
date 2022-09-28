@@ -1,45 +1,47 @@
 #Importamos lo necesario
 
 import datetime
-from re import S
 import pandas as pd
 import requests
-import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
 #Preparamos la extracción de la data
 
-resolution = 3600
-start = datetime.datetime(2022,8,1).timestamp()
-end = datetime.datetime.today().timestamp()
+resolution = 3600 #Establecemos como ventana 1 hora
+start = datetime.datetime(2022,8,1).timestamp() #Fecha de inicio del análisis (Anterior a la que analizaremos, para los MAs)
+end = datetime.datetime.today().timestamp() #Fecha de finalización (Al día)
 api_url = 'https://ftx.com/api'
-markets = ['BTC/USD','ETH/USD','USDT/USD','BNB/USD','XRP/USD','SOL/USD','DOGE/USD','DOT/USD','DAI/USD','MATIC/USD']
+
+#Armamos las listas que necesitaremos
+
+markets = ['BTC/USD','ETH/USD','USDT/USD','BNB/USD','XRP/USD','SOL/USD','DOGE/USD','DOT/USD','DAI/USD','SHIB/USD'] 
 varianzas = []
 conversion_a_usd = []
+nombres = ['Bitcoin','Ethereum','Tether','BNB','XRP','Solana','Dogecoin','Polkadot','Dai','Shiba Inu']
 
 #Extraemos la data
 
 for coin in markets:
-    path = f'/markets/{coin}/candles?resolution={resolution}&start_time={start}&end_time={end}'
-    url = api_url + path
-    res = requests.get(url).json()
+    path = f'/markets/{coin}/candles?resolution={resolution}&start_time={start}&end_time={end}' #Armamos el request
+    url = api_url + path #Armamos el url
+    res = requests.get(url).json() #Pedimos la data
     df = pd.DataFrame(res['result'])
     df['date'] = pd.to_datetime(df['startTime'])
     df = df.drop(columns=['startTime','time'])
     name = coin.replace('/','_')
     df['coin']=str(coin)
     df.sort_values('date',inplace=True)
-    df['SMA20'] = round(df['close'].rolling(20).mean())
-    df['SMA200'] = round(df['close'].rolling(200).mean())
-    df['varianza'] = (df['high'] - df['low'])
-    varianzas.append(df.varianza.mean())
-    conversion_a_usd.append(float(df.iloc[len(df)-1]['close']))
-    df.to_csv('markets_data/'+ name +'.csv')
+    df['SMA20'] = df['close'].rolling(20).mean() #Creamos columna con MA a corto plazo
+    df['SMA200'] = df['close'].rolling(200).mean() #Creamos columna con MA a largo plazo
+    df['varianza'] = (abs(df['close'] - df['open'])) #Creamos columna spread
+    varianzas.append(df.varianza.mean()) #Obtenemos la varianza promedio diaria
+    conversion_a_usd.append(float(df.iloc[len(df)-1]['close'])) #Agregamos precio actual para el cambio
+    df.to_csv('markets_data/'+ name +'.csv') #Guardamos la data
 
 #Obtenemos y unificamos la data
 
-btc_usd = pd.read_csv('markets_data/BTC_USD.csv')
+btc_usd = pd.read_csv('markets_data/BTC_USD.csv') #Leemos la data
 eth_usd = pd.read_csv('markets_data/ETH_USD.csv')
 usdt_usd = pd.read_csv('markets_data/USDT_USD.csv')
 bnb_usd = pd.read_csv('markets_data/BNB_USD.csv')
@@ -48,8 +50,11 @@ sol_usd = pd.read_csv('markets_data/SOL_USD.csv')
 doge_usd = pd.read_csv('markets_data/DOGE_USD.csv')
 dot_usd = pd.read_csv('markets_data/DOT_USD.csv')
 dai_usd = pd.read_csv('markets_data/DAI_USD.csv')
-matic_usd = pd.read_csv('markets_data/MATIC_USD.csv')
-df = pd.concat([btc_usd,eth_usd,usdt_usd,bnb_usd,xrp_usd,sol_usd,doge_usd,dot_usd,dai_usd,matic_usd],ignore_index=True)
+shib_usd = pd.read_csv('markets_data/SHIB_USD.csv')
+
+#Creamos un sólo dataframe
+
+df = pd.concat([btc_usd,eth_usd,usdt_usd,bnb_usd,xrp_usd,sol_usd,doge_usd,dot_usd,dai_usd,shib_usd],ignore_index=True)
 df.reset_index(drop=True,inplace=True)
 df.drop(columns='Unnamed: 0',inplace=True)
 
@@ -59,21 +64,14 @@ st.set_page_config(page_title = "PI03-Crypto-Analytics",
                    page_icon = ":money_with_wings:",
                    layout='wide')
 
-#Establecemos la sidebar
+coin = st.sidebar.selectbox("Seleccione la moneda a observar:" ,df["coin"].unique()) #Seleccionamos la moneda
 
-st.sidebar.header("Filtros:")
-
-coin = st.sidebar.selectbox("Seleccione la moneda a observar:" ,df["coin"].unique())
-
-day = str(datetime.datetime(2022,9,1))
+start_day = str(datetime.datetime(2022,9,1)) #Día de inicio
 
 data = df.query(
-        'coin == @coin & date >= @day')
- 
+        'coin == @coin & date >= @start_day') #Filtramos el dataframe
 
-#Título
-
-st.title('Análisis de Criptos:')
+st.title('Análisis de Criptomonedas:') #Título
 st.markdown('Observaremos cada hora desde comienzos de septimbre')
 
 #Figura 1: Candlesticks
@@ -84,8 +82,11 @@ fig1 = go.Figure(data=[go.Candlestick(x=data['date'],
                 low=data['low'],
                 close=data['close'])])
 
+indice = df["coin"].unique().tolist().index(coin)
+nombre = nombres[indice]
+
 fig1.update_layout(
-    title=coin)
+    title=coin+' - '+nombre) #Fijamos Título
 
 # Add range slider
 fig1.update_layout(
@@ -108,7 +109,6 @@ fig1.update_layout(
                      label="1d",
                      step="day",
                      stepmode="backward"),
-                dict(step="all")
             ])
         ),
         rangeslider=dict(
@@ -123,7 +123,7 @@ fig1.update_layout(
 fig2 = go.Figure(data= go.Scatter(x=data['date'], y=data['close'], mode='lines', name='Price', line_color="#6F6F6F"))
 
 fig2.update_layout(
-    title= 'Price and SMAs',
+    title= 'Precio y SMAs',
     xaxis=dict(
         rangeselector=dict(
             buttons=list([
@@ -143,7 +143,6 @@ fig2.update_layout(
                      label="1d",
                      step="day",
                      stepmode="backward"),
-                dict(step="all")
             ])
         ),
         rangeslider=dict(
@@ -164,7 +163,7 @@ fig2.add_trace(sma_200)
 fig3 = go.Figure(data=go.Bar(x=data['date'], y=data['volume']))
 
 fig3.update_layout(
-    title= 'Volumes',
+    title= 'Volumenes',
     xaxis=dict(
         rangeselector=dict(
             buttons=list([
@@ -184,7 +183,6 @@ fig3.update_layout(
                      label="1d",
                      step="day",
                      stepmode="backward"),
-                dict(step="all")
             ])
         ),
         rangeslider=dict(
@@ -197,7 +195,18 @@ fig3.update_layout(
 #Figura 4: Varianza
 
 fig4 = go.Figure(data= go.Bar(x=df['coin'].unique(), y=varianzas, name='Varianza'))
-fig4.update_layout(title= 'Varianza')
+fig4.update_layout(title= 'Comparación de Varianzas')
+
+#Buscaremos el precio de un día
+
+day = str(st.sidebar.date_input('Selecciona una fecha:'))
+
+dia = df.query(
+        'coin == @coin & date >= @day')
+st.sidebar.write('El precio de compra fue:',round(dia.high.mean(),2),'USD ')
+st.sidebar.write('El precio de venta fue:',round(dia.low.mean(),2),'USD')
+
+#Armaremos la calculadora
 
 monedas = df["coin"].unique().tolist()
 monedas2 = []
@@ -211,7 +220,7 @@ conversion_a_usd.append(float(1/290))
 
 c1 = st.sidebar.selectbox("Moneda original:" ,monedas2)
 c2 = st.sidebar.selectbox("Moneda a convertir:" ,monedas2)
-cant = st.sidebar.number_input('Cantidad original:')
+cant = st.sidebar.number_input('Cantidad:')
 
 def coin_converter(a,b):
     ia = monedas2.index(a)
@@ -220,8 +229,11 @@ def coin_converter(a,b):
     cambio = usd/conversion_a_usd[ib]
     return (cambio)
 
+st.sidebar.write('El cambio es:',coin_converter(c1,c2),c2)
+
+#Imprimiremos todo
+
 st.plotly_chart(fig1)
 st.plotly_chart(fig2)
 st.plotly_chart(fig3)
 st.plotly_chart(fig4)
-st.sidebar.write('El cambio es:',coin_converter(c1,c2),c2)
