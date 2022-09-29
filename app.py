@@ -15,10 +15,10 @@ api_url = 'https://ftx.com/api'
 
 #Armamos las listas que necesitaremos
 
-markets = ['BTC/USD','ETH/USD','USDT/USD','BNB/USD','XRP/USD','SOL/USD','DOGE/USD','DOT/USD','DAI/USD','SHIB/USD'] 
+markets = ['BTC/USD','ETH/USD','USDT/USD','BNB/USD','XRP/USD','SOL/USD','DOGE/USD','DOT/USD','DAI/USD','MATIC/USD'] 
 varianzas = []
 conversion_a_usd = []
-nombres = ['Bitcoin','Ethereum','Tether','BNB','XRP','Solana','Dogecoin','Polkadot','Dai','Shiba Inu']
+nombres = ['Bitcoin','Ether','Tether','BNB','XRP','Solana','Dogecoin','Polkadot','Dai','Polygon']
 
 #Extraemos la data
 
@@ -34,8 +34,8 @@ for coin in markets:
     df.sort_values('date',inplace=True)
     df['SMA20'] = df['close'].rolling(20).mean() #Creamos columna con MA a corto plazo
     df['SMA200'] = df['close'].rolling(200).mean() #Creamos columna con MA a largo plazo
-    df['varianza'] = (abs(df['close'] - df['open'])) #Creamos columna spread
-    varianzas.append(df.varianza.mean()) #Obtenemos la varianza promedio diaria
+    df['varianza'] = ((((df['high']-df['open']) + (df['open']-df['low']))/2)/df['open']) #Creamos columna spread
+    varianzas.append(df.varianza.mean()*100) #Obtenemos la varianza promedio diaria
     conversion_a_usd.append(float(df.iloc[len(df)-1]['close'])) #Agregamos precio actual para el cambio
     df.to_csv('markets_data/'+ name +'.csv') #Guardamos la data
 
@@ -194,15 +194,18 @@ fig3.update_layout(
 
 #Figura 4: Varianza
 
-fig4 = go.Figure(data= go.Bar(x=df['coin'].unique(), y=varianzas, name='Varianza'))
+fig4 = go.Figure(data= go.Bar(x=df['coin'].unique(), y=varianzas, name='Varianza Porcentual'))
 fig4.update_layout(title= 'Comparación de Varianzas')
 
 #Buscaremos el precio de un día
 
-day = str(st.sidebar.date_input('Selecciona una fecha:'))
+day1 = st.sidebar.date_input('Selecciona una fecha:')
+day2 = day1 + datetime.timedelta(days = 1)
+dia1 = str(day1)
+dia2 = str(day2)
 
-dia = df.query(
-        'coin == @coin & date >= @day')
+dia = data.query(
+        ' date >= @dia1 & date <= @dia2')
 st.sidebar.write('El precio de compra fue:',round(dia.high.mean(),2),'USD ')
 st.sidebar.write('El precio de venta fue:',round(dia.low.mean(),2),'USD')
 
