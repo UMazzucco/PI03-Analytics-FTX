@@ -226,7 +226,7 @@ for elem in monedas:
 monedas2.append('USD')
 monedas2.append('ARS')
 conversion_a_usd.append(float(1))
-conversion_a_usd.append(float(1/290))
+conversion_a_usd.append(float(1/150))
 
 c1 = st.sidebar.selectbox("Moneda original:" ,monedas2)
 c2 = st.sidebar.selectbox("Moneda a convertir:" ,monedas2)
