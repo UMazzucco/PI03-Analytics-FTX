@@ -16,7 +16,8 @@ api_url = 'https://ftx.com/api'
 #Armamos las listas que necesitaremos
 
 markets = ['BTC/USD','ETH/USD','USDT/USD','BNB/USD','XRP/USD','SOL/USD','DOGE/USD','DOT/USD','DAI/USD','MATIC/USD'] 
-varianzas = []
+varianza_media = []
+varianza_max = []
 conversion_a_usd = []
 nombres = ['Bitcoin','Ether','Tether','BNB','XRP','Solana','Dogecoin','Polkadot','Dai','Polygon']
 
@@ -35,7 +36,8 @@ for coin in markets:
     df['SMA20'] = df['close'].rolling(20).mean() #Creamos columna con MA a corto plazo
     df['SMA200'] = df['close'].rolling(200).mean() #Creamos columna con MA a largo plazo
     df['varianza'] = ((((df['high']-df['open']) + (df['open']-df['low']))/2)/df['open']) #Creamos columna spread
-    varianzas.append(df.varianza.mean()*100) #Obtenemos la varianza promedio diaria
+    varianza_media.append(df.varianza.mean()*100)#Obtenemos la varianza promedio
+    varianza_max.append(df.varianza.max()*100) #Obtenemos la varianza máxima
     conversion_a_usd.append(float(df.iloc[len(df)-1]['close'])) #Agregamos precio actual para el cambio
     df.to_csv('markets_data/'+ name +'.csv') #Guardamos la data
 
@@ -194,8 +196,13 @@ fig3.update_layout(
 
 #Figura 4: Varianza
 
-fig4 = go.Figure(data= go.Bar(x=df['coin'].unique(), y=varianzas, name='Varianza Porcentual'))
-fig4.update_layout(title= 'Comparación de Varianzas')
+fig4 = go.Figure(data= go.Bar(x=df['coin'].unique(), y=varianza_media, name='Varianza Porcentual Promedio'))
+fig4.update_layout(title= 'Comparación de Varianza Porcentual Promedio')
+
+fig5 = go.Figure(data=go.Bar(x=df['coin'].unique(), y=varianza_max, name='Varianza Porcentual Máxima'))
+fig5.update_layout(title= 'Comparación de Varianza Porcentual Máxima')
+fig5.update_traces(marker_color='#FF4242')
+
 
 #Buscaremos el precio de un día
 
@@ -240,3 +247,4 @@ st.plotly_chart(fig1)
 st.plotly_chart(fig2)
 st.plotly_chart(fig3)
 st.plotly_chart(fig4)
+st.plotly_chart(fig5)
