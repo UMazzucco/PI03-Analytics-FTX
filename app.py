@@ -120,12 +120,12 @@ fig1.update_layout(
     )
 )
 
-#Figura 2: Precio y MA
+#Figura 2: Precio y Medias Móviles
 
 fig2 = go.Figure(data= go.Scatter(x=data['date'], y=data['close'], mode='lines', name='Price', line_color="#6F6F6F"))
 
 fig2.update_layout(
-    title= 'Precio y SMAs',
+    title= 'Precio y Media Móvil',
     xaxis=dict(
         rangeselector=dict(
             buttons=list([
@@ -154,8 +154,8 @@ fig2.update_layout(
     )
 )
 
-sma_20 = go.Scatter(x=data['date'], y=data['SMA20'], mode='lines', name='SMA20', line_color="#7DFF03")
-sma_200 = go.Scatter(x=data['date'], y=data['SMA200'], mode='lines', name='SMA200', line_color="#FFF703")
+sma_20 = go.Scatter(x=data['date'], y=data['SMA20'], mode='lines', name='MM20', line_color="#7DFF03")
+sma_200 = go.Scatter(x=data['date'], y=data['SMA200'], mode='lines', name='MM200', line_color="#FFF703")
 
 fig2.add_trace(sma_20)
 fig2.add_trace(sma_200)
