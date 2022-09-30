@@ -10,7 +10,7 @@ Desde <https://coinmarketcap.com/es/> seleccionaremos las 10 criptomonedas con m
 
 ### Lista de mercados
 
-Bitcoin (BTC), Ether (ETH), Tether (USDT), BNB, XRP, Solana (SOL), Dogecoin (DOGE), Polkadot (DOT), Dai (DAI) y Polygon (MATIC)
+Bitcoin (BTC), Ethereum (ETH), Tether (USDT), BNB, XRP, Solana (SOL), Dogecoin (DOGE), Polkadot (DOT), Dai (DAI) y Polygon (MATIC)
 
 ## Link
 
