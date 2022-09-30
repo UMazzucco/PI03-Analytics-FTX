@@ -19,7 +19,7 @@ markets = ['BTC/USD','ETH/USD','USDT/USD','BNB/USD','XRP/USD','SOL/USD','DOGE/US
 varianza_media = []
 varianza_max = []
 conversion_a_usd = []
-nombres = ['Bitcoin','Ether','Tether','BNB','XRP','Solana','Dogecoin','Polkadot','Dai','Polygon']
+nombres = ['Bitcoin','Ethereum','Tether','BNB','XRP','Solana','Dogecoin','Polkadot','Dai','Polygon']
 
 #Extraemos la data
 
