@@ -2,21 +2,29 @@
 
 ![image](https://help.ftx.com/hc/article_attachments/4409994973844/mceclip0.png)
 
-## Introducción
+## About
 
-Este es el último proyecto individual de la etapa de Labs en Henry de Uriel Mazzucco
+Este es el último proyecto individual para Henry de Uriel Mazzucco
 
-Desde <https://coinmarketcap.com/es/> seleccionaremos las 10 criptomonedas con mayor capitalización de mercado al momento, con mercado cripto/usd en ftx. Todos los mercados operan respecto al dólar
+En un dashboard en Streamlit mostraremos el la fluctuación de precios, volúmenes de transacción, varianza porcentual promedio y máxima y medias móviles a 20 y a 200 períodos.
+
+Utilizaremos el período desde comienzos de septiembre, y nuestra ventana será de una hora.
+
+Seleccionaremos las criptomonedas que cuenten con mayor capitalización de mercado al momento según <https://coinmarketcap.com/es/> , con mercado respecto al dólar en FTX. Todos los mercados operan.
+
+Agregamos también un selector para consultar los precios de la criptomoneda deseada un día en particular y una calculadora que nos permitirá convertir entre criptomonedas, dólares y pesos argentinos.
+
+Expondremos además una breve explicación sobre la fluctuación del precio de Ethereum desde el análisis fundamental
 
 ### Lista de mercados
 
 Bitcoin (BTC), Ethereum (ETH), Tether (USDT), BNB, XRP, Solana (SOL), Dogecoin (DOGE), Polkadot (DOT), Dai (DAI) y Polygon (MATIC)
 
-## Link
+## Link del Dashboard
 
 Se podrá encontrar la aplicación en <https://umazzucco-pi03-analytics-ftx-app-9klilj.streamlitapp.com/>
 
-## Links de interés
+## Links de interés (Análisis Ethereum)
 
 Merge Ethereum: <https://blog.ethereum.org/2022/08/24/mainnet-merge-announcement>
 
