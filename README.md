@@ -24,4 +24,4 @@ FOMC Fund Rate Increase: <https://www.forbes.com/advisor/investing/fomc-meeting-
 
 13 Sept Volatility: <https://u.today/september-13-is-crucial-date-for-cryptocurrency-market-and-not-only-because-of-ethereum-merge#h20>
 
-US CPI <https://ycharts.com/indicators/us_inflation_rate#:~:text=US%20Inflation%20Rate%20is%20at,long%20term%20average%20of%203.26%25.>
+US CPI: <https://ycharts.com/indicators/us_inflation_rate#:~:text=US%20Inflation%20Rate%20is%20at,long%20term%20average%20of%203.26%25.>
