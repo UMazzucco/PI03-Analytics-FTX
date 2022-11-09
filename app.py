@@ -10,7 +10,7 @@ import streamlit as st
 
 resolution = 3600 #Establecemos como ventana 1 hora
 start = datetime.datetime(2022,8,1).timestamp() #Fecha de inicio del análisis (Anterior a la que analizaremos, para los MAs)
-end = datetime.datetime.today().timestamp() #Fecha de finalización (Al día)
+end = datetime.datetime(2022,10,1).timestamp() #Fecha de finalización (Abarcando Septiembre)
 api_url = 'https://ftx.com/api'
 
 #Armamos las listas que necesitaremos
