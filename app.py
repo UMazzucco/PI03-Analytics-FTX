@@ -69,9 +69,10 @@ st.set_page_config(page_title = "PI03-Crypto-Analytics",
 coin = st.sidebar.selectbox("Seleccione la moneda a observar:" ,df["coin"].unique()) #Seleccionamos la moneda
 
 start_day = str(datetime.datetime(2022,9,1)) #Día de inicio
+end_day = str(datetime.datetime(2022,10,1)) #Día de cierre
 
 data = df.query(
-        'coin == @coin & date >= @start_day') #Filtramos el dataframe
+        'coin == @coin & date >= @start_day & date < end_day') #Filtramos el dataframe
 
 st.title('Análisis de Criptomonedas:') #Título
 st.markdown('Observaremos cada hora desde comienzos de septimbre')
