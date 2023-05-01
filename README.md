@@ -8,13 +8,13 @@ Este es mi 3er Proyecto Individual para el curso de Data Science de Henry.
 
 En un dashboard en Streamlit mostraremos la fluctuación de precios, volúmenes de transacción, varianza porcentual promedio, y máxima y medias móviles a 20 y a 200 períodos.
 
-Utilizaremos el período desde comienzos de septiembre, y nuestra ventana será de una hora.
+Utilicé el período desde comienzos de septiembre, y nuestra ventana será de una hora.
 
-Seleccionaremos las criptomonedas que cuenten con mayor capitalización de mercado al momento según <https://coinmarketcap.com/es/> , con mercado respecto al dólar en FTX. Todos los mercados operan.
+Seleccionamos las criptomonedas que cuenten con mayor capitalización de mercado al momento según <https://coinmarketcap.com/es/> , con mercado respecto al dólar en FTX. Todos los mercados operan.
 
 Agregamos también un selector para consultar los precios de la criptomoneda deseada un día en particular y una calculadora que nos permitirá convertir entre criptomonedas, dólares y pesos argentinos.
 
-Expondremos además una breve explicación sobre la fluctuación del precio de Ethereum desde el análisis fundamental
+Se expuso además una breve explicación sobre la fluctuación del precio de Ethereum desde el análisis fundamental.
 
 ### Lista de mercados
 
