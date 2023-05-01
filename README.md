@@ -25,6 +25,8 @@ Bitcoin (BTC), Ethereum (ETH), Tether (USDT), BNB, XRP, Solana (SOL), Dogecoin (
 La aplicación funcionaba en <https://umazzucco-pi03-analytics-ftx-app-9klilj.streamlitapp.com/>  
 Sin embargo, debido a la caída de la API de FTX por cuestiones legales, está fuera de funcionamiento. Más información sobre el caso en <https://www.investopedia.com/what-went-wrong-with-ftx-6828447>
 
+## El análisis se centró en buscar los momentos con subidas y caídas más abruptas, en busca de hitos que nos permitieran, desde el análisis fundamental de mercado, predecir la tendencia a nivel general. Investigando dichas caídas encontramos coincidencias con diversos hitos, como el proceso de migración del sistema de Ethereum (y el consecuente impedimento al minado de dicha criptomoneda) la suba de las tasas bancarias en Estados Unidos y la revelación de la inflación para dicho mes en el mismo país. Todos estos momentos generaron desconfianza y forzaron la venta de la divisa, que posteriormente se estabilizaba con un rebote.
+
 ## Links de interés (Análisis Ethereum)
 
 Merge Ethereum: <https://blog.ethereum.org/2022/08/24/mainnet-merge-announcement>
