@@ -1,12 +1,12 @@
 # PI03 - Analytics
 
-![image](https://help.ftx.com/hc/article_attachments/4409994973844/mceclip0.png)
+<img src='https://user-images.githubusercontent.com/103452945/235523906-1f61fefb-7624-4445-ae5f-0e884609645c.png' width='50' height='50'> <img src='https://user-images.githubusercontent.com/103452945/235524753-f95f11fa-7e22-48c5-af5e-59958c487e81.svg' width='125' height='50'> <img src='https://user-images.githubusercontent.com/103452945/235524029-b3882169-c909-410a-be79-958aefa4c653.png' width='50' height='50'> <img src='https://user-images.githubusercontent.com/103452945/235523917-9ee94b84-f5b6-49ed-b801-df814d319814.png' width='50' height='50'> <img src='https://user-images.githubusercontent.com/103452945/235469235-3c78abd3-dfd3-4755-bcc2-192b8fdfe4b9.png' width='125' height='50'> 
 
 ## About
 
-Este es el último proyecto individual para Henry de Uriel Mazzucco
+Este es mi 3er Proyecto Individual para el curso de Data Science de Henry.
 
-En un dashboard en Streamlit mostraremos el la fluctuación de precios, volúmenes de transacción, varianza porcentual promedio y máxima y medias móviles a 20 y a 200 períodos.
+En un dashboard en Streamlit mostraremos la fluctuación de precios, volúmenes de transacción, varianza porcentual promedio, y máxima y medias móviles a 20 y a 200 períodos.
 
 Utilizaremos el período desde comienzos de septiembre, y nuestra ventana será de una hora.
 
@@ -20,7 +20,7 @@ Expondremos además una breve explicación sobre la fluctuación del precio de E
 
 Bitcoin (BTC), Ethereum (ETH), Tether (USDT), BNB, XRP, Solana (SOL), Dogecoin (DOGE), Polkadot (DOT), Dai (DAI) y Polygon (MATIC)
 
-## Link del Dashboard
+## Dashboard
 
 Se podrá encontrar la aplicación en <https://umazzucco-pi03-analytics-ftx-app-9klilj.streamlitapp.com/>
 
