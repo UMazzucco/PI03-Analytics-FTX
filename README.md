@@ -22,7 +22,8 @@ Bitcoin (BTC), Ethereum (ETH), Tether (USDT), BNB, XRP, Solana (SOL), Dogecoin (
 
 ## Dashboard
 
-Se podrá encontrar la aplicación en <https://umazzucco-pi03-analytics-ftx-app-9klilj.streamlitapp.com/>
+La aplicación funcionaba en <https://umazzucco-pi03-analytics-ftx-app-9klilj.streamlitapp.com/>  
+Sin embargo, debido a la caída de la API de FTX por cuestiones legales, está fuera de funcionamiento. Más información sobre el caso en <https://www.investopedia.com/what-went-wrong-with-ftx-6828447>
 
 ## Links de interés (Análisis Ethereum)
 
